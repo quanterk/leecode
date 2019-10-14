@@ -1,0 +1,46 @@
+class Solution {
+public:
+    vector<int> FindNumbersWithSum(vector<int> array,int sum) {
+        
+        if (array.size()<2) return vector<int>();
+        int mini = INT_MAX, a0 = 0 , b0 = 0,product = 0;
+        int left=0;
+        int right=array.size()-1;
+        bool flag=false;
+        
+         
+        while (left<right){
+            if (array[left]+array[right]>sum) right--;
+            else if (array[left]+array[right]<sum) left++;  //×¢Òâelse if
+            else{
+                flag=true;
+                product=array[left]*array[right];
+                if(product<mini){
+                    a0=array[left];
+                    b0=array[right];
+                    mini=product;
+                    
+                    
+                    
+                }
+                
+                left++;  //¼ÌÐøÉ¨
+              
+               
+                
+                
+  
+            }
+            
+            
+            
+            
+            
+        }
+        if (flag) return  vector<int>{a0,b0};
+        else  return vector<int>();
+        
+
+        
+    }
+};
