@@ -1,0 +1,39 @@
+//o(n^3 )+o(nlogn) 排序
+class Solution {
+public:
+    vector<vector<int>> fourSum(vector<int>& nums, int target) {
+        
+        if(nums.size()<4) return vector<vector<int>>();
+        set<vector<int>> re;
+        sort(nums.begin(),nums.end());
+        for (int i = 0; i < int(nums.size()-3); i++){
+            for (int j = i+1 ;j <int( nums.size()-2) ; j++){
+                int left=j+1,right=nums.size()-1;
+                while (left<right){
+                    int sum=nums[i]+nums[j]+nums[left]+nums[right];
+                    if (sum==target){
+                        vector<int> temp={nums[i],nums[j],nums[left],nums[right]};
+                        re.insert(temp);
+                        left++;
+                        right--;
+
+                    }
+                
+                else if(sum>target) right--;
+                else left++;
+                
+                
+                
+              }            
+            
+                    
+           }
+                
+            
+            
+        }
+        
+        
+        return vector<vector<int>>(re.begin(),re.end());
+    }
+};
