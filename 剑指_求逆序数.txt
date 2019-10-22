@@ -1,0 +1,91 @@
+
+python：
+def merge_sort(lst): 
+        merge_sort.num=0
+        n=len(lst)
+        if n<=1:
+            return lst
+        m=n//2
+        left_li=lst[:m] 
+        right_li=lst[m:]
+        left_li=merge_sort(lst[:m] ) 
+        right_li=merge_sort(lst[m:]) 
+        l_pointer,r_pointer=0,0  
+        result=[]
+        while l_pointer<len( left_li) and r_pointer<len(right_li):
+
+
+            if left_li[l_pointer]>right_li[ r_pointer]: 
+
+                result.append(left_li[l_pointer])
+                merge_sort.num+=1
+                l_pointer+=1
+            else:
+                result.append(right_li[ r_pointer])
+                r_pointer+=1
+        result+= left_li[l_pointer:]
+        result+=right_li[ r_pointer:]
+
+        return result
+
+
+
+
+
+#include <iostream>
+#include<vector>
+#include <algorithm>
+#include<string>
+using namespace std;
+
+vector<int> merge_sort(vector<int>lst,int begin, int end) {
+
+	vector<int> result;
+	int mid = (begin + end) / 2;
+	if (lst.size() == 1) return lst;
+	vector<int> left_li = merge_sort(lst,begin,mid);
+	vector<int> right_li = merge_sort(lst, mid + 1, end);
+	int pl = 0, pr = 0;
+	while (pl < left_li.size() && pr < right_li.size()) {
+		if (left_li[pl] >= right_li[pr]) {
+			result.push_back(left_li[pl]);
+			pr++;
+
+		}
+		else {
+			result.push_back(right_li[pl]);
+			pl++;
+		}
+	while (pl < left_li.size()) result.push_back(left_li[pl++]);
+	while (pr < right_li.size()) result.push_back(right_li[pr++]);
+
+	
+	}
+
+	return result;
+
+}
+
+
+
+//int main() {
+	vector<int>lst = { 1,2,3,4 ,0 };
+	int begin = 0;
+	int end = lst.size()-1;
+	vector<int> result;
+	result = merge_sort(lst, begin, end);
+
+
+	for (auto c : result)
+		cout << c << endl;
+
+
+
+
+	//for (vector<int>::iterator i=nums.begin();i!=nums.end(),++i)
+
+	return 0;
+}
+
+
+

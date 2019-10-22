@@ -1,0 +1,27 @@
+ O(N)
+#include<string>
+class Solution {
+public:
+    vector<string> summaryRanges(vector<int>& nums) {
+        if (nums.empty()) return {};
+        int n = nums.size();
+        int i = 0;
+        vector<string> re;
+        while(i < n ){
+            int left = i ;
+            int right = i;
+            while((right+1) < n && nums[right]+1 == nums[right+1] ) right++;
+            if (left == right) 
+                re.push_back(to_string(nums[left]));
+            else
+                re.push_back(to_string(nums[left]) + "->" + to_string(nums[right]));
+            //cout<<right<<endl;
+            
+            i = right + 1;   
+        } 
+        return re;
+        
+        
+        
+    }
+};
