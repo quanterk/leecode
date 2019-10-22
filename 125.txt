@@ -1,0 +1,33 @@
+class Solution {
+public:
+    bool isPalindrome(string s) {
+        
+        int i = 0;
+        int j = s.length()-1;
+        while (i < j){
+            while(!isalnum(s[i]) && i < j){
+                i++;  // 跳过全部的非法字符；
+                
+            } 
+            while(!isalnum(s[j]) && i < j){
+                 j--;  //跳过全部的非法字符；
+            }
+            //cout<<i<< endl;
+            if (toupper(s[i]) != toupper(s[j])) return false;
+            
+            
+            
+            i++;
+            j--;
+  
+            
+            
+            
+            
+            
+        }
+        return true;
+        
+        
+    }
+};

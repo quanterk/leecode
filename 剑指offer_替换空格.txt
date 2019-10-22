@@ -1,0 +1,47 @@
+class Solution {
+public:
+	void replaceSpace(char *str,int length) {
+        int space_num = 0;
+        for(int i = 0;i< length;i++){
+            if (str[i] == " ")
+                space_num++;
+        }
+        
+        int new_length = length + 2 *  space_num;
+        int old_index = length -1 , new_index =new_length -1;
+        
+        for(;old_index < new_index && old_index > 0 ;old_index--)
+            if(srt[old_index])
+        
+        
+        
+
+	}
+};
+
+class Solution
+{
+public:
+    void replaceSpace(char *str,int length)
+    {
+        int spacenum = 0;
+        for(int i = 0; i<length; i++) //统计空格数
+        {
+            if(str[i] == ' ') spacenum++;
+        }
+       
+        int newlength = length + spacenum*2; //新长度
+        int indexold = length - 1, indexnew = newlength - 1; //设置新旧两个指针
+        for(; indexold >= 0 && indexnew>indexold; indexold--) //indexold从后往前扫描整个字符串
+        {
+            if(str[indexold]  == ' ') //将空格替换为“20%”
+            {
+                str[indexnew--] = '0';
+                str[indexnew--] = '2';
+                str[indexnew--] = '%';
+            }
+            else
+                str[indexnew--] = str[indexold];
+        }
+    }
+};
