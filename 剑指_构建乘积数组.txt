@@ -1,0 +1,23 @@
+O£¨N£©
+class Solution {
+public:
+    vector<int> multiply(const vector<int>& A) {
+        vector<int>B(A.size());
+        B[0]=1;
+        for (int i = 1 ;i < A.size();i++){  //i=1~n-1
+            B[i] = B[i-1]*A[i-1];  
+        }
+        int temp = 1;
+        for (int j = A.size()-1 ; j >= 1; j--){  //j =n-1: 1
+            temp *= A[j];
+            B[j-1] *= temp;
+        }
+        
+        return B;
+        
+        
+            
+        
+    
+    }
+};
