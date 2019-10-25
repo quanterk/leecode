@@ -1,0 +1,14 @@
+//多次反转。 O(N),O(1)
+class Solution {
+public:
+    string LeftRotateString(string str, int n) {
+        if (n < 1 || str.empty()) return str;
+        n = n%str.size();  //防止过大;
+        reverse(str.begin(),str.end());
+        reverse(str.begin(),str.end()-n);
+        reverse(str.end()-n,str.end());
+        
+        
+        return str;
+    }
+};

@@ -1,0 +1,23 @@
+class Solution {
+public:
+    string ReverseSentence(string str) {
+        string result,temp;
+        
+        for(char c: str){
+            if (c ==' ' ){  // space 表示为‘ ’
+                result =  ' '+temp+result ;
+                temp="";  //重新置空 ，新的字符串表示为“”。
+                
+            }
+            else{
+                temp += c;
+            }
+        }
+        
+        
+        if (temp.size()) result = temp + result;
+     return result;
+        
+    }
+    
+};
