@@ -1,0 +1,58 @@
+class Solution
+{
+public:
+    int kthSmallest(vector<vector<int>>& m, int k) 
+    {
+        int left = m[0][0];
+        int right = m.back().back();
+        
+        while(left < right )
+            
+        {
+            int mid = left + (right - left) / 2;
+            
+            int count = lessthan(m,mid);
+            
+            if(count < k)
+                left = mid + 1 ;
+            
+            else
+                right = mid;
+            
+            
+        }
+        
+        
+        return left;
+        
+    }
+    
+    int lessthan(vector<vector<int>>& m, int target)
+    {
+        int i = m.size()-1, j = 0;
+        int res = 0;
+        
+        while(i >= 0 && j < m.size())
+        {
+            if(m[i][j] <= target)
+            {
+                res += i+1; //该列以上行都小于target;
+                
+                j++ ;  // 扫描下一列；
+                
+                
+                
+            }
+            
+            else
+                i-- ; //上一行
+            
+            
+        }
+        
+        return res;
+        
+        
+        
+    }
+};

@@ -1,0 +1,44 @@
+class Solution 
+{
+public:
+    vector<string> Permutation(string str)
+    {
+        vector<string> result;
+        if(str.empty()) return result;
+        map<char,int> dic;
+        for (auto c : str) dic[c]++;
+        string path = "";
+        dfs(str, result, dic, path);
+        return result;
+        
+    }
+    
+   void dfs(string&str, vector<string>&result, map<char,int>&dic, string&path)
+   {
+       if(path.size() == str.size())
+       {
+           result.push_back(path);
+          return;  
+       }
+       for(auto &p: dic)
+       {
+           if(p.second > 0)
+           {
+               path.push_back(p.first);
+               p.second--;
+               dfs(str,result,dic,path);
+               path.pop_back();
+               p.second++;
+               
+               
+           }
+           
+           
+       }
+       
+       
+       
+       
+       
+   }
+};

@@ -1,0 +1,26 @@
+class Solution
+{
+public:
+    bool checkInclusion(string s1, string s2)
+    {
+        if(s1.empty() || s2.empty()) return false;
+       
+        int n1 = s1.size(), n2 = s2.size();
+        vector<int> m1(128), m2(128);//统计表（也可用hash表）
+       
+        for (int i = 0; i < n1; ++i) //对s1,s2中前n1个字符统计
+        {
+            m1[s1[i] - 'a']++; m2[s2[i] - 'a']++;
+        }
+       
+        if (m1 == m2) return true; //若各字符出现的次数相等，说明可以由s1排列得到当前s2中的子串
+       
+        for (int i = n1; i < n2; ++i) //滑动窗口扫描s2
+        {
+            m2[s2[i] - 'a']++;
+            m2[s2[i - n1] - 'a']--;
+            if (m1 == m2) return true;
+        }
+        return false;
+    }
+};
