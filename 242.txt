@@ -1,0 +1,36 @@
+class Solution 
+{
+public:
+    bool isAnagram(string s, string t)
+     {
+         if( s.size() != t.size()) return false;
+         //map<char,  int> dict;
+        unordered_map<char,int>  dict;
+         
+         for(auto c: s)
+         {
+             dict[c]++;
+
+         }
+         //map<int, string>::iterator it = dict.begin()
+     
+         for (auto c2: t)
+         {
+             if (dict.count(c2) == 0)
+                return false;
+             dict[c2] --;
+         }
+
+       for(auto &m: dict)
+         {
+             if (m.second != 0)   return false;break;
+
+    
+      
+         }
+
+
+
+  return true;
+    }
+};

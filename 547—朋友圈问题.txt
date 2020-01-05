@@ -1,0 +1,111 @@
+method 1: 并查集
+class Solution {
+private:
+    vector<int> p;
+    int n;
+    void init(){
+        p.resize(n+1);
+        for(int i = 0; i < n; i++){
+            p[i] = i;
+        }
+   }
+   
+   int findRoot(int x){
+       if(p[x] != x){
+            p[x] = findRoot(p[x]);
+
+       }
+       return p[x];
+
+   }
+
+   void merge(int a, int b){
+       int ra = findRoot(a);
+       int rb = findRoot(b);
+       if(ra != rb){
+           p[rb] = ra;
+       }
+
+   }
+public:
+    int findCircleNum(vector<vector<int>>& M) {
+        p.clear();
+        n = M.size();
+        init();
+        for(int i = 0; i < n; i++){
+            for(int j = 0; j < n; j++){
+                if (M[i][j] == 1) merge(i,j);
+            }
+        }
+        int ans = 0;
+        for (int i = 0; i < n; i++){
+            if(p[i] == i) ans++;
+        }
+        return ans;
+    }
+};
+
+method2 : bfs + dfs 
+
+
+
+class Solution {
+private:
+    vector<int> visited;
+
+    void dfs(vector<vector<int>>& M,int i){
+        visited[i] = 1;
+        for(int j = 0; j < M[i].size();j++){
+            if(M[i][j] == 1 & !visited[j]){
+            visited[j] = 1;
+            dfs(M,j);
+              }
+
+
+         }
+    }
+
+    void bfs(vector<vector<int>>& M,int i){
+        queue<int>  q;
+        q.push(i);
+        visited[i] = 1;
+        while(!q.empty()){
+            int t = q.front();
+            q.pop();
+            visited[t] = 1;
+            for(int j = 0; j < M[t].size();j++){
+                if(M[t][j] == 1 & !visited[j]){
+                    q.push(j);
+                    
+                }
+            }
+
+        }
+
+
+
+
+
+    }
+
+public:
+
+
+
+    int findCircleNum(vector<vector<int>>& M) {
+        int n = M.size();
+        visited.resize(n);
+        
+        int cnt = 0;
+        for (int i =0; i < n; i++){
+            if(!visited[i]){
+                dfs(M,i);
+                cnt ++;
+
+            }
+
+        }
+        return cnt;
+        
+    }
+};

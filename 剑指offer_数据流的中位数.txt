@@ -1,0 +1,28 @@
+class Solution {
+public:
+    priority_queue<int> maxheap;
+    priority_queue<int,vector<int>,greater<int>> minheap;
+    
+    void Insert(int num)
+    {
+        if(maxheap.empty() || num < maxheap.top()) maxheap.push(num);
+        else minheap.push(num);
+        
+        if (maxheap.size() < minheap.size()){
+            maxheap.push(minheap.top());
+            minheap.pop();   
+        }    
+        if (maxheap.size() > minheap.size() + 1){
+            minheap.push(maxheap.top());
+            maxheap.pop(); 
+            }
+        
+    }
+
+    double GetMedian()
+    { 
+        return (maxheap.size() > minheap.size())? maxheap.top():(maxheap.top() + minheap.top())*0.5;
+    
+    }
+
+};

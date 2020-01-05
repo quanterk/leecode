@@ -1,0 +1,45 @@
+class Solution {
+public:
+    int findKthLargest(vector<int>& arr, int k) {
+    int begin = 0, end = arr.size();
+    k = arr.size() - k + 1;
+   // assert(k>0 && k<=end);
+
+    int target_num = 0;
+    while (begin < end){
+        int pos = partition(arr, begin, end);
+        if(pos == k-1){
+            target_num = arr[pos];
+            break;
+        }
+        else if(pos > k-1){
+            end = pos;
+        }
+        else{
+            begin = pos + 1;
+        }
+    }
+    return target_num;
+        
+    }
+
+private:
+    int partition(vector<int>&arr, int begin, int end){
+    srand(time(nullptr)); //以当前时间为随机生成器的种子
+    int pivotpos = rand()%(end - begin + 1) + begin; //产生【left,right】之间的数
+    swap(arr[pivotpos], arr[begin]); //将枢轴暂时放入起始位置
+
+    int pivot = arr[begin];
+    while(begin < end)
+    {
+        while(begin < end && arr[--end] >= pivot);
+        arr[begin] = arr[end];
+        while(begin < end && arr[++begin] <= pivot);
+        arr[end] = arr[begin];
+    }
+    arr[begin] = pivot;
+    swap(arr[begin], arr[pivot]); //将枢轴移动到位
+    return begin;
+}
+    
+};

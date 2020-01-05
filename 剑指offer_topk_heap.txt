@@ -1,0 +1,33 @@
+#include <algorithm>
+#include <queue>
+class Solution {
+public:
+    vector<int> GetLeastNumbers_Solution(vector<int> nums, int k) {
+        vector<int>result;
+        if(nums.empty() || k <= 0 || k > nums.size())  return result;
+        priority_queue<int,vector<int>,less<int>> maxheap; // 构建大顶堆
+        for(int i = 0; i < nums.size(); i++){
+            if (i <= k - 1){
+                maxheap.push(nums[i]);
+
+            }
+            else{
+                if(nums[i] < maxheap.top()){
+                    maxheap.pop();
+                    maxheap.push(nums[i]);
+                }
+            }
+        }
+        
+        for (int i = 1; i <= k;i++){
+             result.push_back(maxheap.top());
+             maxheap.pop();
+            
+            
+        }
+        return result;
+
+
+        
+    }
+};

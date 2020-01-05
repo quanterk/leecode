@@ -1,0 +1,36 @@
+/**
+*  struct ListNode {
+*        int val;
+*        struct ListNode *next;
+*        ListNode(int x) :
+*              val(x), next(NULL) {
+*        }
+*  };
+*/
+class Solution {
+ //可以先反转，再append
+// 或者用栈做辅助
+public:
+    vector<int> printListFromTailToHead(ListNode* head) {
+        stack<ListNode*> nodes;
+        ListNode* p = head;
+        while(p != nullptr){
+            nodes.push(p);
+            p = p->next;
+            
+        }
+        
+        vector<int> result;
+        while(!nodes.empty()){
+            result.push_back(nodes.top()->val);
+            nodes.pop();
+            
+            
+        }
+        
+        return result;
+        
+        
+        
+    }
+};

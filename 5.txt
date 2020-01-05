@@ -1,0 +1,46 @@
+class Solution {
+    
+private:
+    int maxLen;
+    int start;
+    
+public:
+    string longestPalindrome(string s)
+    {
+        int len = s.size();
+        if(len < 2 ) return s;
+        start = maxLen = 0;
+        for(int i = 0; i < len; i++)
+        {
+            valid(s,i,i);
+            valid(s,i,i+1); //假定是奇数；
+            
+        }
+        //cout<<start<<" "<<maxLen<<endl;
+        
+        return s.substr(start,maxLen);
+        
+        
+        
+        
+    }
+private:
+    void valid(string &s, int left, int right )
+    {
+        while(s[left] == s[right] && left >= 0 && right < s.size())
+        {
+            left--;
+            right++;
+            
+        }
+        if(right-left-1 > maxLen)
+        {
+        start = left+1;
+        maxLen = right-left-1;
+            
+            
+            
+        }
+
+    }
+};

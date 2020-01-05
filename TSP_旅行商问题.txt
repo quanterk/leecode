@@ -1,0 +1,82 @@
+
+#include<iostream>
+#include<vector>
+#include<unordered_map>
+using namespace std;
+
+int main() {
+	int n = 4, M = -1;
+	int col = 1 << (n - 1);
+	//vector<vector<int>> dp(1 << N, vector<int>(N, M));
+	vector<vector<int>> C = { {0 ,2, 6, 5},
+				              {2 ,0, 4, 4},
+			                  {6 ,4, 0, 2},
+				              {5, 4, 2, 0 } };
+
+
+
+
+	vector<vector<int>> dp;
+	for (int i = 0; i < n; i++) {
+		dp.push_back(vector<int>());
+		for (int j = 0; j <= col; j++) {
+			dp[i].push_back(99999);
+		}
+	}
+	
+	//dp 表第一列
+	for (int i = 0; i < n; i++) {   
+		//cout << C[i][0];
+		dp[i][0] = C[i][0];
+	}
+	// 从第一列开始填充, 
+	for (int j = 1; j < col; j++)  {
+		for (int i = 0; i < n; i++) {
+			//dp[i][j] = 9999999;
+			//异常处理二：     dp[2][3] = dp[2][{1,2}] ;这种特殊情况,看j的第i位置是不是1
+			if (((j >> (i-1)) & 1) ==1 )
+				continue;
+			for (int k = 1; k < n; k++) {
+				//异常处理2 ： dp[2][5] = dp [2][{1,3}]  k = 2 时  去不了
+				if (((j >> (k - 1)) & 1) == 0)
+					continue;
+				if (dp[i][j] > C[i][k] + dp[k][j ^ (1 << (k - 1))])
+				{
+					 
+						dp[i][j] = C[i][k] + dp[k][j ^ (1 << (k - 1))];
+				}
+
+			
+			}
+		
+		}
+
+
+
+    }
+	cout << dp[0][col - 1];
+	return dp[0][col -1 ];
+	/*
+		for (int i = 0; i < n; i++) {
+		dp.push_back(vector<int>());
+		int jh = pow(2, n - 1) - 1;
+		for (int j = 0; j <= jh; j++) {
+			dp[i].push_back(99999); } }
+	for (auto v : dp) {
+		for (auto x : v) {
+
+			cout << x << '\t';
+		}
+		cout << '\n';
+
+	}
+	
+	
+	*/
+
+
+
+
+
+
+}
